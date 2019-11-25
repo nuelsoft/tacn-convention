@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Global {
-  static TextEditingController areaController = TextEditingController();
+  static int local = 0;
+  static int synced = 0;
+
+  static SharedPreferences prefs;
+  setPref() async {
+    prefs = await SharedPreferences.getInstance();
+    local = (getLocal() == null) ? 0 : getLocal();
+    synced = (getSynced() == null) ? 0 : getSynced();
+  }
+
+  int getLocal() {
+    return prefs.getInt('local');
+  }
+
+  int getSynced() {
+    return prefs.getInt('synced');
+  }
+
+  static TextEditingController areaController =
+      TextEditingController(text: areas[0]);
   static int selectedArea = 0;
   static List<String> areas = [
     "Aba",
@@ -16,13 +36,15 @@ class Global {
     "Chokoneze",
     "Edda",
     "Ehere",
-    "Ehie Amufu",
+    "Ehe Amufu",
     "Enugu",
     "Eziukwu Aba",
     "Ibere",
     "Ikwuano",
+    "Isikwuato",
     "Lorji",
     "Ngor-Okpala",
+    "New Owerri",
     "Obowo",
     "Ogbor Hill",
     "Ogwashi-Uku",
@@ -30,10 +52,12 @@ class Global {
     "Okigwe",
     "Okpoko",
     "Oloko",
+    "Olokoro",
+    "Onicha",
     "Onitsha",
     "Orlu",
-    "Osisa",
-    "Ovu",
+    "Ossissa",
+    "Oru",
     "Owerri",
     "Oyigbo",
     "Ubakala",
@@ -42,5 +66,4 @@ class Global {
     "Umuosi",
     "Umuzombgbo"
   ];
-  
 }

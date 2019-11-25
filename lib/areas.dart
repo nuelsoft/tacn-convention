@@ -25,6 +25,7 @@ class _AreasState extends State<Areas> {
               setState(() {
                 Global.selectedArea = i;
               });
+              Navigator.pop(context);
             },
             selectedIndex: Global.selectedArea,
           )
