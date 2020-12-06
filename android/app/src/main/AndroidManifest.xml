@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.soft.datum">
+    package="ng.com.rad5.tacnconvention">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
                      android:maxSdkVersion="18" />
@@ -11,7 +11,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="datum"
+        android:label="TACN Convention"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

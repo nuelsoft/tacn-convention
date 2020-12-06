@@ -1,8 +1,19 @@
-import 'package:datum/global.dart';
+import 'package:tacn_convention/global.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppState extends ChangeNotifier {
   AppState();
+
+  static bool authenticated = false;
+
+  void setAuthState(bool b){
+    authenticated = b;
+    notifyListeners();
+  }
+
+  bool getAuthState(){
+    return authenticated;
+  }
 
   void incrementLocalCount() async {
     await Global.prefs.setInt('local', getLocalCount() + 1).whenComplete(() {
@@ -14,18 +25,9 @@ class AppState extends ChangeNotifier {
     });
   }
 
-  void incrementSyncedCount() async {
-    await Global.prefs.setInt('synced', getSyncedCount() + 1).whenComplete((){
-          notifyListeners();
-    });
-  }
 
   int getLocalCount() {
     print("fetched");
     return (Global().getLocal() == null) ? 0 : Global().getLocal();
-  }
-
-  int getSyncedCount() {
-    return (Global().getSynced() == null) ? 0 : Global().getSynced();
   }
 }

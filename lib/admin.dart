@@ -38,10 +38,10 @@ class _AdminPageState extends State<AdminPage> {
       currentProcess = "Getting data from the cloud";
       isProcessing = true;
     });
-    List<List<dynamic>> rows = List<List<dynamic>>();
+    List<List<dynamic>> rows = List<List<dynamic>>(); 
     var cloud = await Firestore.instance
-        .collection("datum")
-        .document("data")
+        .collection("all")
+        .document(DateTime.now().year.toString())
         .get()
         .whenComplete(() {
       setState(() {
@@ -49,26 +49,26 @@ class _AdminPageState extends State<AdminPage> {
       });
     });
     rows.add([
+      "Title",
       "Name",
       "Gender",
-      "Phone Number",
-      "Email",
+      "Phone number",
       "Age",
       "Area",
-      "Assembly",
-      "Meal Ticket"
+      "Meal Ticket",
+      "Collector"
     ]);
     if (cloud.data != null) {
       for (int i = 0; i < cloud.data["collected"].length; i++) {
         List<dynamic> row = List<dynamic>();
-        row.add(cloud.data["collected"][i]["name"]);
+        row.add(cloud.data["collected"][i]["title"]);
+        row.add(cloud.data['collected'][i]['name']);
         row.add(cloud.data["collected"][i]["gender"]);
         row.add(cloud.data["collected"][i]["phone"]);
-        row.add(cloud.data["collected"][i]["email"]);
         row.add(cloud.data["collected"][i]["age_bracket"]);
         row.add(cloud.data["collected"][i]["area"]);
-        row.add(cloud.data["collected"][i]["assembly"]);
         row.add(cloud.data["collected"][i]["meal_ticket"]);
+        row.add(cloud.data["collected"][i]["collector"]);
         rows.add(row);
       }
 
@@ -87,8 +87,8 @@ class _AdminPageState extends State<AdminPage> {
   sendMailAndAttachment() async {
     final Email email = Email(
       body:
-          'Data Collected and Compiled by the Datum App. <br> A CSV file is attached to this <b>mail</b> <hr><br> Compiled at ${DateTime.now()}',
-      subject: 'Datum Entry for ${DateTime.now().toString()}',
+          'Data Collected and Compiled by the TACN App. <br> A CSV file is attached to this <b>mail</b> <hr><br> Compiled at ${DateTime.now()}',
+      subject: 'TACN Compilation for ${DateTime.now().year.toString()}',
       recipients: [AdminPage._emailController.text],
       isHTML: true,
       attachmentPath: filePath,
@@ -103,7 +103,7 @@ class _AdminPageState extends State<AdminPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(title: Text("Datum Dash")),
+      appBar: AppBar(title: Text("Admin Dash")),
       body: ListView(
         padding: EdgeInsets.only(top: 45, right: 10, left: 10, bottom: 20),
         children: <Widget>[

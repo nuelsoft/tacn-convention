@@ -1,5 +1,5 @@
-import 'package:datum/custom_selector.dart';
-import 'package:datum/global.dart';
+import 'package:tacn_convention/custom_selector.dart';
+import 'package:tacn_convention/global.dart';
 import 'package:flutter/material.dart';
 
 class Areas extends StatefulWidget {
